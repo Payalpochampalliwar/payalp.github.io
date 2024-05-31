@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Upload an Excel/CSV file</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+  </form>
+  <h3>DPD Counts:</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Cust State</th>
+        <th>DPD</th>
+        <th>Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for dpd_count in dpd_counts %}
+        <tr>
+          <td>{{ dpd_count.state }}</td>
+          <td>{{ dpd_count.dpd }}</td>
+          <td>{{ dpd_count.count }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
